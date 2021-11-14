@@ -13,8 +13,8 @@ var io = require('socket.io')(httpServer);
 
 var settings = require('./settings.json');
 
-//var Cleverbot = require('./cleverbot.js');
-//var Sham = require('./shamchat.js').Sham;
+var Cleverbot = require('./cleverbot.js');
+var Sham = require('./shamchat.js').Sham;
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname+'/static/index.htm');
@@ -26,7 +26,7 @@ io.on('connection', function(socket) {
     var omegleClients = {};
 
     // List of clever bot clients
-    //var cleverClients = {};
+    var cleverClients = {};
 
     // Stores challenge omegle clients
     var challenges = {};
@@ -325,11 +325,11 @@ io.on('connection', function(socket) {
             delete omegleClients[key];
         }
 
-        /*for(var key in cleverClients) {
+        for(var key in cleverClients) {
             if(cleverClients[key] != null) {
                 delete cleverClients[key];
             }
-        }*/
+        }
     });
 
     // Client wants us to disconnect a stranger
@@ -530,7 +530,7 @@ io.on('connection', function(socket) {
     });
 
     // Client is asking for a new clever client
-    /*socket.on('newClever', function(args){
+    socket.on('newClever', function(args){
         // Find the first free clientID
         var i = 0;
         while(cleverClients['clever'+(++i)] != null) {};
@@ -552,7 +552,7 @@ io.on('connection', function(socket) {
                 socket.emit('cleverGotMessage', client_id, resp['message']);
             });
         }
-    });*/
+    });
 
     // Attempt to find a new proxy
     function tryFindNewProxy(callback) {
@@ -632,7 +632,7 @@ Omegle.onReady(function(serverList) {
     console.log('Visit 127.0.0.1:' + omeglePortNumber + ' in your web browser to view the GUI.');
 });
 
-/*var test = new Sham();
+var test = new Sham();
 test.start(function(err) {
     console.log(err);
 });
@@ -640,4 +640,4 @@ test.start(function(err) {
 test.on('newid', function(client_id) {
     console.log('Got a newID: ' + client_id);
 });
-*/
+
