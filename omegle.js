@@ -200,8 +200,8 @@ Omegle.prototype.requestFull = function(method, path, data, keepAlive, callback,
 
     // Handle disconnect error
     req.on('error', function(error) {
-        //console.log('$$$ ERROR!!!! $$$');
-        //console.log(error);
+        console.log('$$$ ERROR!!!! $$$');
+        console.log(error);
 
         // Grab the message
         var msg = 'ERROR (' + getTimeStamp() + '): ' + error.message;
